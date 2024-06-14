@@ -40,6 +40,34 @@ def generate_config(path: str, proxies: list, filename: str) -> list:
         "external-controller": EXTERNAL_CONTROLLER,
         "mode": "Rule",
         "log-level": "silent",
+        "unified-delay": True,
+        "global-client-fingerprint": "chrome",
+        "dns": {
+            "enable": True,
+            "listen": ":53",
+            "ipv6": True,
+            "enhanced-mode": "fake-ip",
+            "fake-ip-range": "198.18.0.1/16",
+            "default-nameserver": [
+                "223.5.5.5",
+                "223.6.6.6"
+            ],
+            "nameserver": [
+                "https://dns.alidns.com/dns-query",
+                "https://doh.pub/dns-query"
+            ],
+            "fallback": [
+                "https://1.0.0.1/dns-query",
+                "tls://dns.google"
+            ],
+            "fallback-filter": {
+                "geoip": True,
+                "geoip-code": "CN",
+                "ipcidr": [
+                    "240.0.0.0/4"
+                ]
+            }
+        }
     }
 
     config.update(external_config)
